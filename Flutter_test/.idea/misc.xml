@@ -29,4 +29,7 @@
       </value>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false">
+    <output url="file://D:/AndroidStudioProjects/output" />
+  </component>
 </project>
