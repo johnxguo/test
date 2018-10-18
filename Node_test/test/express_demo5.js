@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + "/" + "index.htm")
 });
 
-app.post('/process_post', urlencodedParse,  function (req, res) {
+app.post('/process_post',urlencodedParse, function (req, res) {
     var response = { 
         'sealsjson':req.body.sealsjson
     }
