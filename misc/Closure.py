@@ -9,5 +9,4 @@ def create_fun(num):
     return fun_bound
 
 funs = [create_fun(num) for num in range(1,10)]
-for fu in funs:
-    fu()
+[fu() for fu in funs]
