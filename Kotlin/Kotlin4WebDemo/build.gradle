@@ -1,0 +1,55 @@
+group 'com.easy.kotlin'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.2.61'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+
+}
+
+apply plugin: 'kotlin2js'
+
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+
+    def kotlinx_html_version = "0.6.10"
+    // include for client-side
+    compile "org.jetbrains.kotlinx:kotlinx-html-js:${kotlinx_html_version}"
+}
+
+build.doLast {
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/web"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                println(path)
+                path.endsWith(".js")
+            }
+        }
+    }
+}
+
+compileKotlin2Js {
+    kotlinOptions.outputFile = "${projectDir}/web/app.js"
+    kotlinOptions.moduleKind = "plain"
+    kotlinOptions.sourceMap = true
+    kotlinOptions.verbose = true
+    kotlinOptions.metaInfo = true
+}

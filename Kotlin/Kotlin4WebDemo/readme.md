@@ -1,1 +1,1 @@
-demo
+gradle build
